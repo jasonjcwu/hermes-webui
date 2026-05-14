@@ -3914,7 +3914,7 @@ _SETTINGS_DEFAULTS = {
     "skin": "default",  # accent color skin: default | ares | mono | slate | poseidon | sisyphus | charizard
     "font_size": "default",  # small | default | large | xlarge
     "session_jump_buttons": False,  # show Start/End transcript jump pills
-    "session_endless_scroll": False,  # auto-load older transcript pages while scrolling upward
+    "session_endless_scroll": True,  # auto-load older transcript pages while scrolling upward
     "language": "en",  # UI locale code; must match a key in static/i18n.js LOCALES
     "bot_name": os.getenv(
         "HERMES_WEBUI_BOT_NAME", "Hermes"

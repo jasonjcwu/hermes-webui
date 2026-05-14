@@ -257,7 +257,7 @@ function _statusCardHtml(card){
   </div>`;
 }
 
-const MESSAGE_RENDER_WINDOW_DEFAULT=50;
+const MESSAGE_RENDER_WINDOW_DEFAULT=100;
 let _messageRenderWindowSid=null;
 let _messageRenderWindowSize=MESSAGE_RENDER_WINDOW_DEFAULT;
 function _resetMessageRenderWindow(sid){
@@ -5257,8 +5257,10 @@ function renderMessages(options){
     indicator.id='loadOlderIndicator';
     indicator.className='load-older-indicator message-window-load-earlier';
     indicator.textContent=hiddenBeforeCount>0
-      ? `Load earlier messages (${hiddenBeforeCount} hidden)`
-      : (typeof t==='function'?t('load_older_messages'):'Load earlier messages');
+      ? (typeof t==='function'?t('load_earlier_hidden','Load earlier ({n} hidden)').replace('{n}',hiddenBeforeCount):`Load earlier (${hiddenBeforeCount} hidden)`)
+      : (typeof _isSessionEndlessScrollEnabled==='function'&&_isSessionEndlessScrollEnabled()
+        ? (typeof t==='function'?t('scroll_up_load_more','↑ Scroll up to load more'):'↑ Scroll up to load more')
+        : (typeof t==='function'?t('click_load_earlier','Click to load earlier messages'):'Click to load earlier messages'));
     indicator.onclick=()=>{
       if(hiddenBeforeCount>0) _showEarlierRenderedMessages();
       else if(typeof _loadOlderMessages==='function') _loadOlderMessages();
